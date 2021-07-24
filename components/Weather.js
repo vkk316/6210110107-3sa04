@@ -1,12 +1,16 @@
 import React, { useState , useEffect} from "react";
 import { StyleSheet, Text, ImageBackground, View } from "react-native";
+import ExtraForcast from "./ExtraForcast";
 import Forecast from "./Forcast";
 export default function Weather(props) {
     const [forecastInfo, setForecastInfo] = useState({
         main: '-',
         description: '-',
         temp: 0,
-        icon: '01d'
+        icon: '01d',
+        humidity: 0,
+        wind: 0,
+        visibility: 0,
     })
 
     useEffect(() => {
@@ -20,6 +24,9 @@ export default function Weather(props) {
                         description: json.weather[0].description,
                         temp: json.main.temp,
                         icon: json.weather[0].icon,
+                        humidity: json.main.humidity,
+                        visibility: json.visibility,
+                        wind: json.wind.speed,
                     });
                 })
                 .catch((error) => {
@@ -37,7 +44,10 @@ export default function Weather(props) {
                     {/* <Text style={styles.zipCode}>{props.zipCode}</Text> */}
                     <Forecast {...forecastInfo} />
                 </View>
-
+                <View style={styles.container}>
+                    <ExtraForcast {...forecastInfo} />
+                    
+                </View>
             </ImageBackground>
         </View>
     );
@@ -50,7 +60,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     container: {
-        margin: 8,
+        margin: 14,
         padding: 12,
         alignItems: 'center',
         width: '95%',
@@ -58,7 +68,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     town: {
-        fontSize: 26,
+        fontSize: 24,
         color: '#ffffff',
     },
     zipCode: {

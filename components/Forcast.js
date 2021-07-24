@@ -15,16 +15,16 @@ export default function Forecast(props) {
                     uri: `http://openweathermap.org/img/wn/${props.icon}@2x.png`,
                 }}
             />
-
-            <Text >{props.description}</Text>
+            <Text style= {styles.text}>{props.description}</Text>
         </View >
     );
 }
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: 24,
+        fontSize: 18,
         color: '#fff',
+        includeFontPadding: false,
     },
     description: {
         fontSize: 18,
